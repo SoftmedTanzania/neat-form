@@ -200,5 +200,6 @@ class JsonFormBuilder() : FormBuilder {
         registeredViews[ViewType.MULTI_CHOICE_CHECKBOX] = MultiChoiceCheckBox::class
         registeredViews[ViewType.RADIO_GROUP] = RadioGroupView::class
         registeredViews[ViewType.TOAST_NOTIFICATION] = NotificationNFormView::class
+        registeredViews[ViewType.MASKED_EDIT_TEXT] = MaskedEditTextNFormView::class
     }
 }
