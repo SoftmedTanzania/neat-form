@@ -154,7 +154,7 @@ publishing {
             groupId 'com.nerdstone'
             artifactId getArtifactId()
             version this.version
-            artifact("$buildDir/outputs/aar/${getArtifactId()}-debug.aar")
+            artifact("$buildDir/outputs/aar/${getArtifactId()}-release.aar")
             artifact androidJavadocsJar
             artifact androidSourcesJar
 
