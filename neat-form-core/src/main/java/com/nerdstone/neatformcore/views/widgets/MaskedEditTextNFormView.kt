@@ -31,29 +31,29 @@ class MaskedEditTextNFormView : MaskedEditText, NFormView {
 
     constructor(context: Context) : super(context,null){
         setFloatingLabel(MaterialEditText.FLOATING_LABEL_NORMAL)
-        floatingLabelTextSize = resources.getDimension(R.dimen.bottom_text_size).toInt()
-        floatingLabelTextColor = resources.getColor(R.color.design_default_color_primary)
+        floatingLabelTextSize = resources.getDimension(R.dimen.default_text_size).toInt()
+        floatingLabelTextColor = resources.getColor(R.color.colorBlack)
         invalidate()
     }
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
-//    override fun onTextChanged(
-//        text: CharSequence, start: Int, lengthBefore: Int,
-//        lengthAfter: Int
-//    ) {
-//        super.onTextChanged(text, start, lengthBefore, lengthAfter)
-//        this.dataActionListener?.also {
-//            if (text.isNotEmpty()) {
-//                this.viewDetails.value =
-//                    text.toString().removeAsterisk()
-//
-//            } else {
-//                this.viewDetails.value = null
-//            }
-//            it.onPassData(this.viewDetails)
-//        }
-//    }
+    override fun onTextChanged(
+        text: CharSequence, start: Int, lengthBefore: Int,
+        lengthAfter: Int
+    ) {
+        super.onTextChanged(text, start, lengthBefore, lengthAfter)
+        this.dataActionListener?.also {
+            if (rawText.isNotEmpty()) {
+                this.viewDetails.value =
+                    text.toString().removeAsterisk()
+
+            } else {
+                this.viewDetails.value = null
+            }
+            it.onPassData(this.viewDetails)
+        }
+    }
 
     override fun resetValueWhenHidden() = setText("")
 
@@ -63,7 +63,14 @@ class MaskedEditTextNFormView : MaskedEditText, NFormView {
         val validationPair = formValidator.validateField(this)
         if (!validationPair.first) {
             this.error = validationPair.second
-        } else this.error = null
+            error = validationPair.second
+            isAutoValidate = true
+            errorColor = resources.getColor(R.color.colorRed)
+            floatingLabelTextColor = resources.getColor(R.color.colorRed)
+        } else{
+            this.error = null
+            floatingLabelTextColor = resources.getColor(R.color.colorBlack)
+        }
         return validationPair.first
     }
 
