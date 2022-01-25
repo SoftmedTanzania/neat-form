@@ -8,6 +8,8 @@
   <color name="colorRed">#f44336</color>
   <color name="colorTransparent">#00000000</color>
   <color name="colorPurple">#91468C</color>
+  <color name="colorDeepBlack">#000000</color>
+
 
   <!--Custom -->
   <color name="numberSelectorItemDefault">#F0F3F7</color>
