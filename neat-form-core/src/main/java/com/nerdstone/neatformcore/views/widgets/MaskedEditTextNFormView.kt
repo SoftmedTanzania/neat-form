@@ -2,7 +2,7 @@ package com.nerdstone.neatformcore.views.widgets
 
 import android.content.Context
 import android.util.AttributeSet
-import androidx.appcompat.widget.AppCompatEditText
+import androidx.core.content.ContextCompat.getColor
 import com.nerdstone.neatformcore.R
 import com.nerdstone.neatformcore.domain.listeners.DataActionListener
 import com.nerdstone.neatformcore.domain.listeners.VisibilityChangeListener
@@ -13,7 +13,6 @@ import com.nerdstone.neatformcore.domain.view.NFormView
 import com.nerdstone.neatformcore.utils.handleRequiredStatus
 import com.nerdstone.neatformcore.utils.removeAsterisk
 import com.nerdstone.neatformcore.utils.setReadOnlyState
-import com.nerdstone.neatformcore.views.builders.EditTextViewBuilder
 import com.nerdstone.neatformcore.views.builders.MaskedEditTextViewBuilder
 import com.nerdstone.neatformcore.views.handlers.ViewVisibilityChangeHandler
 import com.rengwuxian.materialedittext.MaterialEditText
@@ -31,29 +30,31 @@ class MaskedEditTextNFormView : MaskedEditText, NFormView {
 
     constructor(context: Context) : super(context,null){
         setFloatingLabel(MaterialEditText.FLOATING_LABEL_NORMAL)
-        floatingLabelTextSize = resources.getDimension(R.dimen.bottom_text_size).toInt()
-        floatingLabelTextColor = resources.getColor(R.color.design_default_color_primary)
+        floatingLabelTextSize = resources.getDimension(R.dimen.default_text_size).toInt()
+        setHintTextColor(getColor(context,R.color.colorRed))
+        floatingLabelTextColor = getColor(context,R.color.design_default_color_on_secondary)
         invalidate()
     }
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
-//    override fun onTextChanged(
-//        text: CharSequence, start: Int, lengthBefore: Int,
-//        lengthAfter: Int
-//    ) {
-//        super.onTextChanged(text, start, lengthBefore, lengthAfter)
-//        this.dataActionListener?.also {
-//            if (text.isNotEmpty()) {
-//                this.viewDetails.value =
-//                    text.toString().removeAsterisk()
-//
-//            } else {
-//                this.viewDetails.value = null
-//            }
-//            it.onPassData(this.viewDetails)
-//        }
-//    }
+    override fun onTextChanged(
+        text: CharSequence, start: Int, lengthBefore: Int,
+        lengthAfter: Int
+    ) {
+        super.onTextChanged(text, start, lengthBefore, lengthAfter)
+        this.dataActionListener?.also {
+            if (rawText.isNotEmpty()) {
+                this.viewDetails.value =
+                    text.toString().removeAsterisk()
+
+            } else {
+                this.viewDetails.value = null
+            }
+            it.onPassData(this.viewDetails)
+        }
+    }
+
 
     override fun resetValueWhenHidden() = setText("")
 
@@ -63,7 +64,15 @@ class MaskedEditTextNFormView : MaskedEditText, NFormView {
         val validationPair = formValidator.validateField(this)
         if (!validationPair.first) {
             this.error = validationPair.second
-        } else this.error = null
+            error = validationPair.second
+            isAutoValidate = true
+            errorColor = getColor(context,R.color.colorRed)
+            floatingLabelTextColor = getColor(context,R.color.colorRed)
+
+        } else {
+            this.error = null
+            floatingLabelTextColor = getColor(context,R.color.colorDeepBlack)
+        }
         return validationPair.first
     }
 
