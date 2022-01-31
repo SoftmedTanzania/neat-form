@@ -9,6 +9,7 @@ import com.nerdstone.neatformcore.domain.model.NFormViewData
 import com.nerdstone.neatformcore.domain.view.NFormView
 import com.nerdstone.neatformcore.utils.*
 import com.nerdstone.neatformcore.views.widgets.SpinnerNFormView
+import timber.log.Timber
 import java.util.*
 
 open class SpinnerViewBuilder(final override val nFormView: NFormView) : ViewBuilder {
@@ -19,7 +20,7 @@ open class SpinnerViewBuilder(final override val nFormView: NFormView) : ViewBui
     val materialSpinner = SmartMaterialSpinner<String>(spinnerNFormView.context)
 
     enum class SpinnerProperties {
-        TEXT, SEARCHABLE
+        TEXT, SEARCHABLE, SELECTION
     }
 
     override val acceptedAttributes get() = SpinnerProperties::class.java.convertEnumToSet()
@@ -44,6 +45,21 @@ open class SpinnerViewBuilder(final override val nFormView: NFormView) : ViewBui
                     setSearchHeaderBackgroundColor(
                         spinnerNFormView.context.getThemeColor(Constants.ThemeColor.COLOR_PRIMARY)
                     )
+                }
+                SpinnerProperties.SELECTION.name -> {
+                    val options = spinnerNFormView.viewProperties.options
+                    val size = options?.size
+                    val valuePassed = attribute.value as String
+                    try {
+                        val valuePassedInt: Int = valuePassed.toInt()
+                        if (valuePassedInt < size!!) {
+                            nFormView.setValue(valuePassed)
+                        }
+                    } catch (e: Exception) {
+                        Timber.e(e)
+                    }
+
+
                 }
             }
         }

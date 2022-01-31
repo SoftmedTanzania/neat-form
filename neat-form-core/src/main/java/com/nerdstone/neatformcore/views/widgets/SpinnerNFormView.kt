@@ -15,6 +15,7 @@ import com.nerdstone.neatformcore.utils.handleRequiredStatus
 import com.nerdstone.neatformcore.utils.setReadOnlyState
 import com.nerdstone.neatformcore.views.builders.SpinnerViewBuilder
 import com.nerdstone.neatformcore.views.handlers.ViewVisibilityChangeHandler
+import timber.log.Timber
 
 class SpinnerNFormView : LinearLayout, NFormView {
 
@@ -47,6 +48,13 @@ class SpinnerNFormView : LinearLayout, NFormView {
                 }
                 is NFormViewData -> {
                     setSelection(item.indexOf(value.value as String), false)
+                }
+                is String -> {
+                    try {
+                        setSelection(value.toInt())
+                    } catch (e: IndexOutOfBoundsException) {
+                        Timber.e("Invalid Selection:  ${e.message}")
+                    }
                 }
             }
             setReadOnlyState(enabled)
