@@ -17,8 +17,10 @@ open class RadioGroupViewBuilder(final override val nFormView: NFormView) : View
     private val radioGroupView = nFormView as RadioGroupView
 
     enum class RadioGroupViewProperties {
-        TEXT
+        TEXT, SELECTION
     }
+
+    private var selectedOption:String? = null
 
     override val acceptedAttributes get() = RadioGroupViewProperties::class.java.convertEnumToSet()
 
@@ -34,6 +36,9 @@ open class RadioGroupViewBuilder(final override val nFormView: NFormView) : View
             RadioGroupViewProperties.TEXT.name -> {
                 radioGroupView.addView(radioGroupView.addViewLabel(attribute.toPair()))
             }
+            RadioGroupViewProperties.SELECTION.name ->{
+               selectedOption = attribute.value as String
+            }
         }
     }
 
@@ -42,6 +47,9 @@ open class RadioGroupViewBuilder(final override val nFormView: NFormView) : View
         options?.also {
             options.forEach { createSingleRadioButton(it) }
         }
+        if(!selectedOption.isNullOrEmpty())
+            radioGroupView.setValue(selectedOption as String)
+
     }
 
     private fun createSingleRadioButton(nFormSubViewProperty: NFormSubViewProperty) {

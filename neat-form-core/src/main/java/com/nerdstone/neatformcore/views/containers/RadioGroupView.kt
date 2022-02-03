@@ -46,6 +46,9 @@ class RadioGroupView : LinearLayout, NFormView {
         if (value is Map<*, *>) {
             viewBuilder.setValue(value.keys.first() as String, enabled)
         }
+        if  (value is String){
+            viewBuilder.setValue(value, enabled)
+        }
     }
 
     override fun setVisibility(visibility: Int) {
