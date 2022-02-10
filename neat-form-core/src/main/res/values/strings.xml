@@ -7,4 +7,7 @@
     <string name="notification_type">notification_type</string>
     <string name="ok">OK</string>
     <string name="error_setting_value">Error setting value</string>
+    <string name="errors_found">Errors found</string>
+    <string name="errors_found_explanation">Please fill in a valid value for all the required fields.</string>
+    <string name="errors_found_confirmation_button">OK</string>
 </resources>
