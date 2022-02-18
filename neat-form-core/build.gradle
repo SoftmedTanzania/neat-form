@@ -91,7 +91,7 @@ dependencies {
     api 'org.jeasy:easy-rules-core:3.3.0'
     api 'org.jeasy:easy-rules-mvel:3.3.0'
     api 'com.google.code.gson:gson:2.8.6'
-    api 'com.github.chivorns:smartmaterialspinner:1.2.1'
+    api 'com.github.chivorns:smartmaterialspinner:1.5.0'
 
     api('com.softmed.masked:MaskedEditText:1.0.5'){
         transitive = true
