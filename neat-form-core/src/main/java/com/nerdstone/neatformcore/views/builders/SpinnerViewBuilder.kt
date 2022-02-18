@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.LinearLayout
 import com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+import com.nerdstone.neatformcore.R
 import com.nerdstone.neatformcore.domain.builders.ViewBuilder
 import com.nerdstone.neatformcore.domain.model.NFormViewData
 import com.nerdstone.neatformcore.domain.view.NFormView
@@ -41,6 +42,7 @@ open class SpinnerViewBuilder(final override val nFormView: NFormView) : ViewBui
                 }
                 SpinnerProperties.SEARCHABLE.name -> {
                     isSearchable = true
+                    setSearchDropdownView(R.layout.custom_dropdown_layout)
                     searchHeaderText = attribute.value as String
                     setSearchHeaderBackgroundColor(
                         spinnerNFormView.context.getThemeColor(Constants.ThemeColor.COLOR_PRIMARY)
@@ -82,6 +84,7 @@ open class SpinnerViewBuilder(final override val nFormView: NFormView) : ViewBui
 
         materialSpinner.apply {
             layoutParams = params
+            setDropdownView(R.layout.custom_dropdown_layout)
             item = spinnerOptions
             selectedItemListColor = this.context.getThemeColor(Constants.ThemeColor.COLOR_ACCENT)
             onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
