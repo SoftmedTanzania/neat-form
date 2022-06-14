@@ -2,7 +2,6 @@ package com.nerdstone.neatformcore.views.widgets
 
 import android.content.Context
 import android.util.AttributeSet
-import androidx.appcompat.widget.AppCompatEditText
 import com.nerdstone.neatformcore.R
 import com.nerdstone.neatformcore.domain.listeners.DataActionListener
 import com.nerdstone.neatformcore.domain.listeners.VisibilityChangeListener
@@ -13,11 +12,10 @@ import com.nerdstone.neatformcore.domain.view.NFormView
 import com.nerdstone.neatformcore.utils.handleRequiredStatus
 import com.nerdstone.neatformcore.utils.removeAsterisk
 import com.nerdstone.neatformcore.utils.setReadOnlyState
-import com.nerdstone.neatformcore.views.builders.EditTextViewBuilder
 import com.nerdstone.neatformcore.views.builders.MaskedEditTextViewBuilder
 import com.nerdstone.neatformcore.views.handlers.ViewVisibilityChangeHandler
 import com.rengwuxian.materialedittext.MaterialEditText
-import com.softmed.masked.MaskedEditText
+import io.github.softmedtanzania.MaskedEditText
 
 class MaskedEditTextNFormView : MaskedEditText, NFormView {
 
@@ -29,13 +27,13 @@ class MaskedEditTextNFormView : MaskedEditText, NFormView {
     override var viewDetails = NFormViewDetails(this)
     override var initialValue: Any? = null
 
-    constructor(context: Context) : super(context,null){
+    constructor(context: Context) : super(context, null) {
         setFloatingLabel(MaterialEditText.FLOATING_LABEL_NORMAL)
         setPrimaryColor(R.color.colorBlack)
         isFloatingLabelAlwaysShown = true
         floatingLabelTextSize = resources.getDimension(R.dimen.default_text_size).toInt()
         floatingLabelTextColor = resources.getColor(R.color.colorBlack)
-        focusFraction=1F
+        focusFraction = 1F
         setMetHintTextColor(R.color.colorBlack)
         invalidate()
     }
@@ -71,7 +69,7 @@ class MaskedEditTextNFormView : MaskedEditText, NFormView {
             isAutoValidate = true
             errorColor = resources.getColor(R.color.colorRed)
             floatingLabelTextColor = resources.getColor(R.color.colorRed)
-        } else{
+        } else {
             this.error = null
             floatingLabelTextColor = resources.getColor(R.color.colorBlack)
         }
