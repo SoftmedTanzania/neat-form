@@ -216,7 +216,7 @@ publishing {
              * Configure path of the package repository on Github using the GITHUB_USER_ID and
              * Git Repository
              */
-            url = uri("https://maven.pkg.github.com/ellykits/neat-form")
+            url = uri("https://maven.pkg.github.com/SoftmedTanzania/neat-form")
             credentials {
                 /** get credentials from local.properties in root project folder file with
                  ** gpr.usr=GITHUB_USER_ID & gpr.key=PERSONAL_ACCESS_TOKEN otherwise
