@@ -11,7 +11,7 @@ jacoco {
 def properties = new Properties()
 properties.load(new FileInputStream(rootProject.file("local.properties")))
 
-version = "1.1.7-NACP-SNAPSHOT"
+version = "1.1.8-NACP-SNAPSHOT"
 
 android {
     compileSdkVersion 29
@@ -19,7 +19,7 @@ android {
     defaultConfig {
         minSdkVersion 18
         targetSdkVersion 29
-        versionCode 1
+        versionCode 2
         versionName this.version
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

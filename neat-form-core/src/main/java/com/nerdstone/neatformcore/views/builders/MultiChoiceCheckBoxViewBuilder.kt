@@ -11,6 +11,7 @@ import com.nerdstone.neatformcore.domain.model.NFormViewData
 import com.nerdstone.neatformcore.domain.view.NFormView
 import com.nerdstone.neatformcore.utils.*
 import com.nerdstone.neatformcore.views.containers.MultiChoiceCheckBox
+import timber.log.Timber
 import java.util.*
 
 open class MultiChoiceCheckBoxViewBuilder(final override val nFormView: NFormView) : ViewBuilder {
@@ -20,7 +21,7 @@ open class MultiChoiceCheckBoxViewBuilder(final override val nFormView: NFormVie
     private var valuesMap: HashMap<String, NFormViewData?>? = null
 
     enum class MultiChoiceCheckBoxProperties {
-        TEXT, OPTIONS_TEXT_SIZE, LABEL_TEXT_SIZE
+        TEXT, OPTIONS_TEXT_SIZE, LABEL_TEXT_SIZE, CHECKED
     }
 
     override val acceptedAttributes get() = MultiChoiceCheckBoxProperties::class.java.convertEnumToSet()
@@ -66,6 +67,13 @@ open class MultiChoiceCheckBoxViewBuilder(final override val nFormView: NFormVie
             text = nFormSubViewProperty.text
             setTag(R.id.field_name, nFormSubViewProperty.name)
             setTag(R.id.is_checkbox_option, true)
+            try {
+                if (!nFormSubViewProperty.viewAttributes.isNullOrEmpty() && nFormSubViewProperty.viewAttributes!!.containsKey(MultiChoiceCheckBoxProperties.CHECKED.name)) {
+                    isChecked = nFormSubViewProperty.viewAttributes!!.get(MultiChoiceCheckBoxProperties.CHECKED.name).toString().toBoolean()
+                }
+            } catch (e: java.lang.Exception) {
+                Timber.e(e)
+            }
             if (multiChoiceCheckBox.viewProperties.getResourceFromAttribute().isNullOrEmpty())
                 TextViewCompat.setTextAppearance(this, R.style.checkBoxStyle)
             setOnCheckedChangeListener { compoundButton, isChecked ->
