@@ -4,5 +4,6 @@
     <declare-styleable name="MultiChoiceCheckBox">
         <attr name="options_text_size" format="dimension" />
         <attr name="label_text_size" format="dimension" />
+        <attr name="checked" format="boolean" />
     </declare-styleable>
 </resources>

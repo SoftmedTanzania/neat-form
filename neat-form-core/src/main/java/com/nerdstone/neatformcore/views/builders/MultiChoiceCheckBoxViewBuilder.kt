@@ -68,8 +68,8 @@ open class MultiChoiceCheckBoxViewBuilder(final override val nFormView: NFormVie
             setTag(R.id.field_name, nFormSubViewProperty.name)
             setTag(R.id.is_checkbox_option, true)
             try {
-                if (!nFormSubViewProperty.viewAttributes.isNullOrEmpty() && nFormSubViewProperty.viewAttributes!!.containsKey(MultiChoiceCheckBoxProperties.CHECKED.name)) {
-                    isChecked = nFormSubViewProperty.viewAttributes!!.get(MultiChoiceCheckBoxProperties.CHECKED.name).toString().toBoolean()
+                if (!nFormSubViewProperty.viewAttributes.isNullOrEmpty() && nFormSubViewProperty.viewAttributes!!.containsKey(MultiChoiceCheckBoxProperties.CHECKED.name.toLowerCase())) {
+                    isChecked = nFormSubViewProperty.viewAttributes!!.get(MultiChoiceCheckBoxProperties.CHECKED.name.toLowerCase()).toString().toBoolean()
                 }
             } catch (e: java.lang.Exception) {
                 Timber.e(e)
